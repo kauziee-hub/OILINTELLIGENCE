@@ -1,0 +1,3 @@
+11:14:36 normal start 200
+11:20:41 normal RESULT {"key": "normal", "verdict": "PASS", "latency_min": null, "false_alarms": 0, "merged": false, "plant_h": 6.09, "top": null, "top_p": null, "status": null, "rank": null, "checks": [], "candidates": [], "est_loss_t": null, "true_loss_t": 0.0, "steps": ["baseline:done", "no_alarm:done"], "wall_min": 6.1}
+11:20:41 ALL DONE

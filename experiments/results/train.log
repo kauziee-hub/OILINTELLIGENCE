@@ -1,0 +1,5 @@
+[1/4] anomaly detection
+[2/4] instrument fault classifier
+[3/4] fault attribution + calibration + loss estimation
+[4/4] active diagnosis
+results -> experiments\results\results.json  (11.3s)

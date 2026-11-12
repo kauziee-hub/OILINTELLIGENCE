@@ -1,0 +1,31 @@
+# Topic-level permissions (least privilege)
+
+# Simulator: publishes synthetic telemetry, records and ground truth; receives control commands
+user simulator
+topic write oilintelligence/simulation/#
+topic write oilintelligence/events/transfers
+topic write oilintelligence/events/records/#
+topic write oilintelligence/events/runs
+topic write oilintelligence/truth/#
+topic read oilintelligence/simulation/control
+topic write oilintelligence/simulation/replies/#
+
+# Backend: reads telemetry, records and (simulation mode) truth; publishes anomalies / control
+user backend
+topic read oilintelligence/simulation/#
+topic read oilintelligence/plant/#
+topic read oilintelligence/events/#
+topic read oilintelligence/truth/#
+topic write oilintelligence/events/anomalies
+topic write oilintelligence/events/faults
+topic write oilintelligence/simulation/control
+topic readwrite oilintelligence/simulation/replies/#
+topic readwrite oilintelligence/system/#
+
+# OPC UA bridge: read-only consumer of simulation telemetry
+user opcua
+topic read oilintelligence/simulation/#
+
+# Plant gateway: may publish plant telemetry only (cannot see simulation truth)
+user gateway
+topic write oilintelligence/plant/#

@@ -1,0 +1,64 @@
+{
+ "tank_leak": {
+  "key": "tank_leak",
+  "verdict": "PASS",
+  "latency_min": 63.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 3.95,
+  "top": "TANK_LEAK:TK-001",
+  "top_p": 0.9854,
+  "status": "RESOLVED_PENDING_APPROVAL",
+  "rank": 1,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-001=NEGATIVE",
+   "TANK_ISOLATION_TEST:TK-001=POSITIVE"
+  ],
+  "candidates": [
+   [
+    "TANK_LEAK:TK-001",
+    0.9854
+   ],
+   [
+    "LEVEL_ERROR:LT-001",
+    0.0064
+   ],
+   [
+    "NORMAL",
+    0.0022
+   ]
+  ],
+  "est_loss_t": 8.433,
+  "true_loss_t": 11.058751166323342,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:done"
+  ],
+  "wall_min": 4.0
+ },
+ "normal": {
+  "key": "normal",
+  "verdict": "PASS",
+  "latency_min": null,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 6.07,
+  "top": null,
+  "top_p": null,
+  "status": null,
+  "rank": null,
+  "checks": [],
+  "candidates": [],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "no_alarm:done"
+  ],
+  "wall_min": 6.1
+ }
+}

@@ -1,0 +1,139 @@
+# OILINTELLIGENCE - development / pilot deployment
+#   cp .env.example .env   (set every *_PASSWORD and JWT_SECRET)
+#   docker compose up -d --build
+#   docker compose --profile monitoring up -d     (adds Prometheus + Grafana)
+# The ML engine and the LangGraph agent run as modules inside the backend process
+# (section 10.1); split them into separate services only when scaling requires it.
+
+name: oilintelligence
+
+x-python: &python
+  build:
+    context: .
+    dockerfile: infrastructure/docker/Dockerfile.python
+  image: oilintelligence/python:1.0
+  restart: unless-stopped
+
+services:
+  database:
+    image: timescale/timescaledb:latest-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: oilintel
+      POSTGRES_USER: oilintel
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/schemas/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U oilintel -d oilintel"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mqtt:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "/config-src/entrypoint.sh"]
+    environment:
+      MQTT_SIMULATOR_PASSWORD: ${MQTT_SIMULATOR_PASSWORD:?}
+      MQTT_BACKEND_PASSWORD: ${MQTT_BACKEND_PASSWORD:?}
+      MQTT_OPCUA_PASSWORD: ${MQTT_OPCUA_PASSWORD:?}
+      MQTT_GATEWAY_PASSWORD: ${MQTT_GATEWAY_PASSWORD:-}
+    volumes:
+      - ./infrastructure/mqtt:/config-src:ro
+      - mqttdata:/mosquitto/data
+    # broker is reachable only on the internal network; publish 8883 (TLS) for external gateways
+
+  simulator:
+    <<: *python
+    command: ["python", "-m", "simulation.engine.runner", "live"]
+    environment:
+      MQTT_HOST: mqtt
+      MQTT_PORT: 1883
+      MQTT_USERNAME: simulator
+      MQTT_PASSWORD: ${MQTT_SIMULATOR_PASSWORD}
+      SIM_SPEED: ${SIM_SPEED:-10}
+      SIM_AUTOSTART: "1"
+    depends_on: [mqtt]
+    healthcheck:
+      disable: true
+
+  opcua:
+    <<: *python
+    command: ["python", "-m", "industrial.opcua.bridge"]
+    environment:
+      MQTT_HOST: mqtt
+      MQTT_USERNAME: opcua
+      MQTT_PASSWORD: ${MQTT_OPCUA_PASSWORD}
+      OPCUA_ENDPOINT: opc.tcp://0.0.0.0:4840/oilintelligence/
+    ports:
+      - "4840:4840"
+    depends_on: [mqtt]
+    healthcheck:
+      disable: true
+
+  backend:
+    <<: *python
+    environment:
+      DATA_MODE: ${DATA_MODE:-SIMULATION}
+      DATABASE_URL: postgresql+psycopg://oilintel:${POSTGRES_PASSWORD}@database:5432/oilintel
+      TRUTH_DATABASE_URL: postgresql+psycopg://oilintel:${POSTGRES_PASSWORD}@database:5432/oilintel_truth
+      BUS: mqtt
+      MQTT_HOST: mqtt
+      MQTT_USERNAME: backend
+      MQTT_PASSWORD: ${MQTT_BACKEND_PASSWORD}
+      SIMULATOR: remote
+      OPCUA_ENABLED: "false"
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-}
+      SEED_ENGINEER_PASSWORD: ${SEED_ENGINEER_PASSWORD:-}
+      SEED_OPERATOR_PASSWORD: ${SEED_OPERATOR_PASSWORD:-}
+      SEED_VIEWER_PASSWORD: ${SEED_VIEWER_PASSWORD:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      LLM_PROVIDER: ${LLM_PROVIDER:-none}
+      LLM_MODEL: ${LLM_MODEL:-claude-opus-5-5}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      MONITOR_INTERVAL_S: ${MONITOR_INTERVAL_S:-300}
+    volumes:
+      - backenddata:/app/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+      mqtt:
+        condition: service_started
+
+  frontend:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.frontend
+      args:
+        NEXT_PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:8000}
+    image: oilintelligence/frontend:1.0
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on: [backend]
+
+  prometheus:
+    image: prom/prometheus:latest
+    profiles: [monitoring]
+    volumes:
+      - ./infrastructure/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:latest
+    profiles: [monitoring]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-change-me}
+    ports:
+      - "3001:3000"
+
+volumes:
+  pgdata:
+  mqttdata:
+  backenddata:

@@ -1,0 +1,279 @@
+{
+ "normal": {
+  "key": "normal",
+  "title": "Normal operation",
+  "expected": "NORMAL",
+  "events": 0,
+  "false_alarm_events": 0,
+  "passed": true,
+  "seconds": 12.1
+ },
+ "pipeline_leak": {
+  "key": "pipeline_leak",
+  "title": "Pipeline leak on PL-002",
+  "expected": "PIPELINE_LEAK:PL-002",
+  "events": 74,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 20.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "PIPELINE_LEAK:PL-003",
+   "PIPELINE_LEAK:PL-002",
+   "NORMAL"
+  ],
+  "top3_p": [
+   0.472,
+   0.431,
+   0.03
+  ],
+  "top1_correct": false,
+  "top3_correct": true,
+  "estimated_loss_t": 5.877,
+  "true_loss_t": 6.336,
+  "checks": [
+   "LINE_INSPECTION:PL-003=NEGATIVE",
+   "LINE_INSPECTION:PL-002=POSITIVE"
+  ],
+  "final_status": "RESOLVED_PENDING_APPROVAL",
+  "final_top": "PIPELINE_LEAK:PL-002",
+  "final_p": 0.991,
+  "resolved_correct": true,
+  "passed": true,
+  "seconds": 14.6
+ },
+ "meter_bias": {
+  "key": "meter_bias",
+  "title": "Flow meter reads 2.5% high",
+  "expected": "METER_ERROR:FM-002",
+  "events": 73,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 25.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "METER_ERROR:FM-002",
+   "NORMAL",
+   "UNKNOWN"
+  ],
+  "top3_p": [
+   0.903,
+   0.03,
+   0.004
+  ],
+  "top1_correct": true,
+  "top3_correct": true,
+  "estimated_loss_t": null,
+  "true_loss_t": 0.0,
+  "checks": [
+   "RETRIEVE_METER_PROVING_RECORD:FM-002=POSITIVE"
+  ],
+  "final_status": "RESOLVED_PENDING_APPROVAL",
+  "final_top": "METER_ERROR:FM-002",
+  "final_p": 0.995,
+  "resolved_correct": true,
+  "passed": true,
+  "seconds": 13.4
+ },
+ "passing_valve": {
+  "key": "passing_valve",
+  "title": "Valve XV-003 passing",
+  "expected": "VALVE_PASSING:XV-003",
+  "events": 77,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 5.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "VALVE_PASSING:XV-003",
+   "NORMAL",
+   "UNKNOWN"
+  ],
+  "top3_p": [
+   0.902,
+   0.03,
+   0.004
+  ],
+  "top1_correct": true,
+  "top3_correct": true,
+  "estimated_loss_t": null,
+  "true_loss_t": 0.0,
+  "checks": [
+   "LEDGER_RECONCILIATION=NEGATIVE"
+  ],
+  "final_status": "RESOLVED_PENDING_APPROVAL",
+  "final_top": "VALVE_PASSING:XV-003",
+  "final_p": 0.907,
+  "resolved_correct": true,
+  "passed": true,
+  "seconds": 13.0
+ },
+ "tank_leak": {
+  "key": "tank_leak",
+  "title": "Tank TK-001 floor leak",
+  "expected": "TANK_LEAK:TK-001",
+  "events": 9,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 155.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "TANK_LEAK:TK-001",
+   "LEVEL_ERROR:LT-001",
+   "NORMAL"
+  ],
+  "top3_p": [
+   0.563,
+   0.341,
+   0.03
+  ],
+  "top1_correct": true,
+  "top3_correct": true,
+  "estimated_loss_t": null,
+  "true_loss_t": 16.127,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-001=NEGATIVE",
+   "TANK_ISOLATION_TEST:TK-001=POSITIVE"
+  ],
+  "final_status": "RESOLVED_PENDING_APPROVAL",
+  "final_top": "TANK_LEAK:TK-001",
+  "final_p": 0.963,
+  "resolved_correct": true,
+  "passed": true,
+  "seconds": 9.4
+ },
+ "level_drift": {
+  "key": "level_drift",
+  "title": "Level gauge LT-002 drifting",
+  "expected": "LEVEL_ERROR:LT-002",
+  "events": 8,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 155.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "LEVEL_ERROR:LT-002",
+   "NORMAL",
+   "UNKNOWN"
+  ],
+  "top3_p": [
+   0.902,
+   0.03,
+   0.004
+  ],
+  "top1_correct": true,
+  "top3_correct": true,
+  "estimated_loss_t": null,
+  "true_loss_t": 0.0,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-002=POSITIVE"
+  ],
+  "final_status": "RESOLVED_PENDING_APPROVAL",
+  "final_top": "LEVEL_ERROR:LT-002",
+  "final_p": 0.994,
+  "resolved_correct": true,
+  "passed": true,
+  "seconds": 12.5
+ },
+ "missing_transfer": {
+  "key": "missing_transfer",
+  "title": "Unrecorded transfer",
+  "expected": "MISSING_TRANSFER:R-02",
+  "events": 42,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 5.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "MISSING_TRANSFER:R-02",
+   "NORMAL",
+   "UNKNOWN"
+  ],
+  "top3_p": [
+   0.902,
+   0.03,
+   0.004
+  ],
+  "top1_correct": true,
+  "top3_correct": true,
+  "estimated_loss_t": null,
+  "true_loss_t": 0.0,
+  "checks": [
+   "LEDGER_RECONCILIATION=POSITIVE"
+  ],
+  "final_status": "RESOLVED_PENDING_APPROVAL",
+  "final_top": "MISSING_TRANSFER:R-02",
+  "final_p": 0.992,
+  "resolved_correct": true,
+  "passed": true,
+  "seconds": 10.1
+ },
+ "unknown_fault": {
+  "key": "unknown_fault",
+  "title": "A fault the model has never seen",
+  "expected": "UNKNOWN",
+  "events": 6,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 125.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "UNKNOWN",
+   "NORMAL",
+   "METER_ERROR:FM-001"
+  ],
+  "top3_p": [
+   0.904,
+   0.03,
+   0.003
+  ],
+  "top1_correct": true,
+  "top3_correct": true,
+  "estimated_loss_t": null,
+  "true_loss_t": 0.0,
+  "top_known_p": 0.003,
+  "passed": true,
+  "seconds": 9.8
+ },
+ "pump_degradation": {
+  "key": "pump_degradation",
+  "title": "Pump PU-001 losing head",
+  "expected": "PUMP_DEGRADATION:PU-001",
+  "events": 75,
+  "false_alarm_events": 0,
+  "detected": true,
+  "latency_min": 15.0,
+  "first_status": "AWAITING_VERIFICATION",
+  "status_after_refresh": "AWAITING_VERIFICATION",
+  "top3": [
+   "PUMP_DEGRADATION:PU-001",
+   "NORMAL",
+   "UNKNOWN"
+  ],
+  "top3_p": [
+   0.902,
+   0.03,
+   0.004
+  ],
+  "top1_correct": true,
+  "top3_correct": true,
+  "estimated_loss_t": null,
+  "true_loss_t": 0.0,
+  "checks": [
+   "PUMP_PERFORMANCE_TEST:PU-001=POSITIVE"
+  ],
+  "final_status": "RESOLVED_PENDING_APPROVAL",
+  "final_top": "PUMP_DEGRADATION:PU-001",
+  "final_p": 0.997,
+  "resolved_correct": true,
+  "passed": true,
+  "seconds": 12.5
+ }
+}

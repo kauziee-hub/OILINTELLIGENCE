@@ -1,0 +1,33 @@
+{
+ "columns": [
+  "type_flow",
+  "type_level",
+  "type_temperature",
+  "q_coverage",
+  "q_flat_run_frac",
+  "q_max_gap_frac",
+  "q_bad_fraction",
+  "z_in_cv",
+  "z_out_cv",
+  "z_bias_dir",
+  "z_tank_cv",
+  "z_consistency",
+  "z_delta_prev",
+  "z_trend3",
+  "z_cum_mean",
+  "active",
+  "sig_noise_ratio",
+  "sig_step_score"
+ ],
+ "classes": [
+  "NORMAL",
+  "BIAS_POS",
+  "BIAS_NEG",
+  "DRIFT",
+  "STUCK",
+  "DROPOUT"
+ ],
+ "name": "sensor_classifier",
+ "version": "v1-bea418efe9d3-202611031001",
+ "created": "2026-11-03T10:02:05.362450+00:00"
+}

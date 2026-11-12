@@ -1,0 +1,25 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+# Node / Next
+apps/frontend/node_modules/
+apps/frontend/.next/
+apps/frontend/next-env.d.ts
+# Local data, secrets and generated artefacts
+.env
+data/
+datasets/synthetic/*
+datasets/training/*
+!datasets/**/README.md
+*.db
+*.db-shm
+*.db-wal
+.claude/
+
+# Tooling logs and trained model artefacts (rebuilt by the training scripts)
+.playwright-mcp/
+models/registry/**/*.joblib
+.vercel

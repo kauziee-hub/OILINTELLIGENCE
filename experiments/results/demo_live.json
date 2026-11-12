@@ -1,0 +1,288 @@
+{
+ "normal": {
+  "key": "normal",
+  "verdict": "PASS",
+  "latency_min": null,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 6.09,
+  "top": null,
+  "top_p": null,
+  "status": null,
+  "rank": null,
+  "checks": [],
+  "candidates": [],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "no_alarm:done"
+  ],
+  "wall_min": 6.1
+ },
+ "passing_valve": {
+  "key": "passing_valve",
+  "verdict": "PASS",
+  "latency_min": 2.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 3.11,
+  "top": "VALVE_PASSING:XV-003",
+  "top_p": 0.8628,
+  "status": "AWAITING_REVIEW",
+  "rank": 1,
+  "checks": [
+   "RETRIEVE_METER_PROVING_RECORD:FM-003=NEGATIVE",
+   "REFERENCE_TEMPERATURE_CHECK:TT-003=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-003=NEGATIVE",
+   "LEDGER_RECONCILIATION=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-001=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-002=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-001=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-002=NEGATIVE",
+   "PUMP_PERFORMANCE_TEST:PU-001=NEGATIVE",
+   "PUMP_PERFORMANCE_TEST:PU-002=NEGATIVE",
+   "LINE_INSPECTION:PL-003=NEGATIVE",
+   "LINE_INSPECTION:PL-001=NEGATIVE",
+   "LINE_INSPECTION:PL-002=NEGATIVE",
+   "LINE_INSPECTION:PL-004=NEGATIVE"
+  ],
+  "candidates": [
+   [
+    "VALVE_PASSING:XV-003",
+    0.8628
+   ],
+   [
+    "NORMAL",
+    0.0472
+   ],
+   [
+    "METER_ERROR:FM-003",
+    0.0348
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:active"
+  ],
+  "wall_min": 3.1
+ },
+ "tank_leak": {
+  "key": "tank_leak",
+  "verdict": "PASS",
+  "latency_min": 32.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 3.62,
+  "top": "TANK_LEAK:TK-001",
+  "top_p": 0.6148,
+  "status": "AWAITING_VERIFICATION",
+  "rank": 1,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-001=NEGATIVE",
+   "LINE_INSPECTION:PL-001=NEGATIVE",
+   "LEDGER_RECONCILIATION=NEGATIVE",
+   "LINE_INSPECTION:PL-004=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-001=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-003=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-002=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-003=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-002=NEGATIVE",
+   "PUMP_PERFORMANCE_TEST:PU-001=NEGATIVE",
+   "PUMP_PERFORMANCE_TEST:PU-002=NEGATIVE",
+   "LINE_INSPECTION:PL-003=NEGATIVE",
+   "REFERENCE_TEMPERATURE_CHECK:TT-004=NEGATIVE",
+   "REFERENCE_TEMPERATURE_CHECK:TT-005=NEGATIVE",
+   "DENSITY_LAB_CHECK:DT-001=POSITIVE"
+  ],
+  "candidates": [
+   [
+    "TANK_LEAK:TK-001",
+    0.6148
+   ],
+   [
+    "LEVEL_ERROR:LT-001",
+    0.095
+   ],
+   [
+    "NORMAL",
+    0.0715
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 19.425784972607495,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:active"
+  ],
+  "wall_min": 3.6
+ },
+ "level_drift": {
+  "key": "level_drift",
+  "verdict": "PASS",
+  "latency_min": 282.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 7.6,
+  "top": "LEVEL_ERROR:LT-002",
+  "top_p": 0.9705,
+  "status": "RESOLVED_PENDING_APPROVAL",
+  "rank": 1,
+  "checks": [
+   "REFERENCE_TEMPERATURE_CHECK:TT-002=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-002=POSITIVE"
+  ],
+  "candidates": [
+   [
+    "LEVEL_ERROR:LT-002",
+    0.9705
+   ],
+   [
+    "TEMP_ERROR:TT-002",
+    0.0094
+   ],
+   [
+    "METER_ERROR:FM-001",
+    0.0047
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:done"
+  ],
+  "wall_min": 7.6
+ },
+ "missing_transfer": {
+  "key": "missing_transfer",
+  "verdict": "PASS",
+  "latency_min": 1.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 3.21,
+  "top": "MISSING_TRANSFER:R-02",
+  "top_p": 0.9917,
+  "status": "RESOLVED_PENDING_APPROVAL",
+  "rank": 1,
+  "checks": [
+   "LEDGER_RECONCILIATION=POSITIVE"
+  ],
+  "candidates": [
+   [
+    "MISSING_TRANSFER:R-02",
+    0.9917
+   ],
+   [
+    "NORMAL",
+    0.001
+   ],
+   [
+    "METER_ERROR:FM-002",
+    0.0004
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:done"
+  ],
+  "wall_min": 3.2
+ },
+ "unknown_fault": {
+  "key": "unknown_fault",
+  "verdict": "PASS",
+  "latency_min": 122.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 5.18,
+  "top": "UNKNOWN",
+  "top_p": 0.9039,
+  "status": "AWAITING_VERIFICATION",
+  "rank": 1,
+  "checks": [],
+  "candidates": [
+   [
+    "UNKNOWN",
+    0.9039
+   ],
+   [
+    "NORMAL",
+    0.0296
+   ],
+   [
+    "METER_ERROR:FM-001",
+    0.003
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done"
+  ],
+  "wall_min": 5.2
+ },
+ "pump_degradation": {
+  "key": "pump_degradation",
+  "verdict": "PASS",
+  "latency_min": 15.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 3.11,
+  "top": "PUMP_DEGRADATION:PU-001",
+  "top_p": 0.9685,
+  "status": "RESOLVED_PENDING_APPROVAL",
+  "rank": 1,
+  "checks": [
+   "PUMP_PERFORMANCE_TEST:PU-001=POSITIVE"
+  ],
+  "candidates": [
+   [
+    "PUMP_DEGRADATION:PU-001",
+    0.9685
+   ],
+   [
+    "METER_ERROR:FM-002",
+    0.0105
+   ],
+   [
+    "TANK_LEAK:TK-002",
+    0.0045
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:done"
+  ],
+  "wall_min": 3.1
+ }
+}

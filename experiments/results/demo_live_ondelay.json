@@ -1,0 +1,149 @@
+{
+ "normal": {
+  "key": "normal",
+  "verdict": "PASS",
+  "latency_min": null,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 6.15,
+  "top": null,
+  "top_p": null,
+  "status": null,
+  "rank": null,
+  "checks": [],
+  "candidates": [],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "no_alarm:done"
+  ],
+  "wall_min": 6.2
+ },
+ "normal#2": {
+  "key": "normal",
+  "verdict": "PASS",
+  "latency_min": null,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 6.14,
+  "top": null,
+  "top_p": null,
+  "status": null,
+  "rank": null,
+  "checks": [],
+  "candidates": [],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "no_alarm:done"
+  ],
+  "wall_min": 6.1
+ },
+ "normal#3": {
+  "key": "normal",
+  "verdict": "PASS",
+  "latency_min": null,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 6.14,
+  "top": null,
+  "top_p": null,
+  "status": null,
+  "rank": null,
+  "checks": [],
+  "candidates": [],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "no_alarm:done"
+  ],
+  "wall_min": 6.1
+ },
+ "level_drift": {
+  "key": "level_drift",
+  "verdict": "PASS",
+  "latency_min": 121.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 4.92,
+  "top": "LEVEL_ERROR:LT-002",
+  "top_p": 0.9505,
+  "status": "RESOLVED_PENDING_APPROVAL",
+  "rank": 1,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-002=POSITIVE"
+  ],
+  "candidates": [
+   [
+    "LEVEL_ERROR:LT-002",
+    0.9505
+   ],
+   [
+    "TEMP_ERROR:TT-002",
+    0.0243
+   ],
+   [
+    "METER_ERROR:FM-002",
+    0.0083
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:done"
+  ],
+  "wall_min": 4.9
+ },
+ "tank_leak": {
+  "key": "tank_leak",
+  "verdict": "PASS",
+  "latency_min": 62.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 3.86,
+  "top": "TANK_LEAK:TK-001",
+  "top_p": 0.868,
+  "status": "AWAITING_REVIEW",
+  "rank": 1,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-001=NEGATIVE",
+   "LINE_INSPECTION:PL-001=NEGATIVE",
+   "REFERENCE_TEMPERATURE_CHECK:TT-001=NEGATIVE",
+   "TANK_ISOLATION_TEST:TK-001=POSITIVE",
+   "VALVE_SEAT_TEST:XV-001=NEGATIVE"
+  ],
+  "candidates": [
+   [
+    "TANK_LEAK:TK-001",
+    0.868
+   ],
+   [
+    "LEVEL_ERROR:LT-001",
+    0.0987
+   ],
+   [
+    "NORMAL",
+    0.008
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 21.73190426230183,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:active"
+  ],
+  "wall_min": 3.9
+ }
+}

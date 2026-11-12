@@ -1,0 +1,24 @@
+{
+ "normal": {
+  "key": "normal",
+  "verdict": "PASS",
+  "latency_min": null,
+  "false_alarms": 2,
+  "merged": false,
+  "plant_h": 6.08,
+  "top": null,
+  "top_p": 0.0,
+  "status": "NEEDS_DATA",
+  "rank": null,
+  "checks": [],
+  "candidates": [],
+  "est_loss_t": null,
+  "true_loss_t": 0.0,
+  "steps": [
+   "baseline:done",
+   "no_alarm:failed",
+   "investigation:done"
+  ],
+  "wall_min": 6.1
+ }
+}

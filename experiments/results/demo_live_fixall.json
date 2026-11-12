@@ -1,0 +1,99 @@
+{
+ "tank_leak": {
+  "key": "tank_leak",
+  "verdict": "PASS",
+  "latency_min": 90.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 4.62,
+  "top": "TANK_LEAK:TK-001",
+  "top_p": 0.3028,
+  "status": "AWAITING_VERIFICATION",
+  "rank": 1,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-001=NEGATIVE",
+   "LINE_INSPECTION:PL-001=NEGATIVE",
+   "VALVE_SEAT_TEST:XV-001=NEGATIVE",
+   "TANK_ISOLATION_TEST:TK-001=NEGATIVE",
+   "LEDGER_RECONCILIATION=NEGATIVE",
+   "REFERENCE_TEMPERATURE_CHECK:TT-001=NEGATIVE",
+   "LINE_INSPECTION:PL-004=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-001=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-002=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-003=NEGATIVE",
+   "MANUAL_TANK_GAUGING:TK-002=NEGATIVE",
+   "RETRIEVE_METER_PROVING_RECORD:FM-003=NEGATIVE",
+   "PUMP_PERFORMANCE_TEST:PU-001=NEGATIVE",
+   "PUMP_PERFORMANCE_TEST:PU-002=NEGATIVE",
+   "REFERENCE_TEMPERATURE_CHECK:TT-004=POSITIVE"
+  ],
+  "candidates": [
+   [
+    "TANK_LEAK:TK-001",
+    0.3028
+   ],
+   [
+    "NORMAL",
+    0.1401
+   ],
+   [
+    "PIPELINE_LEAK:PL-001",
+    0.0977
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 14.050009824192832,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:active"
+  ],
+  "wall_min": 4.6
+ },
+ "tank_leak#2": {
+  "key": "tank_leak",
+  "verdict": "PASS",
+  "latency_min": 61.0,
+  "false_alarms": 0,
+  "merged": false,
+  "plant_h": 3.87,
+  "top": "TANK_LEAK:TK-001",
+  "top_p": 0.9033,
+  "status": "RESOLVED_PENDING_APPROVAL",
+  "rank": 1,
+  "checks": [
+   "MANUAL_TANK_GAUGING:TK-001=NEGATIVE",
+   "VALVE_SEAT_TEST:XV-001=NEGATIVE",
+   "TANK_ISOLATION_TEST:TK-001=POSITIVE",
+   "LINE_INSPECTION:PL-001=NEGATIVE"
+  ],
+  "candidates": [
+   [
+    "TANK_LEAK:TK-001",
+    0.9033
+   ],
+   [
+    "LEVEL_ERROR:LT-001",
+    0.0483
+   ],
+   [
+    "VALVE_PASSING:XV-001",
+    0.0294
+   ]
+  ],
+  "est_loss_t": null,
+  "true_loss_t": 10.68057513769516,
+  "steps": [
+   "baseline:done",
+   "fault:done",
+   "detect:done",
+   "investigate:done",
+   "diagnose:done",
+   "verify:done"
+  ],
+  "wall_min": 3.9
+ }
+}

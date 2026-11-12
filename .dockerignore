@@ -1,0 +1,10 @@
+.venv
+**/node_modules
+**/.next
+datasets
+data
+.git
+.claude
+**/__pycache__
+*.db
+*.db-*

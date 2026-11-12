@@ -1,0 +1,314 @@
+# =============================================================================
+# OILINTELLIGENCE — Plant Definition (Process Design Package, Phase 1)
+# -----------------------------------------------------------------------------
+# Synthetic crude oil storage & transfer tank farm "TF-01".
+# These are SIMULATION DESIGN VALUES, not specifications of any real refinery.
+# This file is the single source of truth for:
+#   * the physics simulator (geometry, hydraulics, pumps, valves, sensors)
+#   * the asset registry / topology graph (backend, digital twin)
+#   * the measurement model used by the mass-balance and attribution engines
+# Units: SI unless stated. Flow setpoints in m3/h, pressures in bar(g),
+# levels in m, temperatures in degC, densities in kg/m3 @ 15 degC reference.
+# =============================================================================
+schema_version: "1.0"
+plant_id: TF-01
+name: Crude Oil Storage & Transfer Terminal TF-01
+reference_temperature_c: 15.0
+
+products:
+  CRUDE-A:
+    name: Light sweet crude (synthetic)
+    density_15c: 850.0            # kg/m3 at 15 degC
+    thermal_expansion_coeff: 0.00085   # 1/degC (alpha), simplified VCF model
+    viscosity_15c_cst: 25.0       # kinematic viscosity at 15 degC, cSt
+    viscosity_temp_coeff: 0.035   # nu(T) = nu15 * exp(-b (T-15))
+    specific_heat_j_kgk: 1950.0
+  CRUDE-B:
+    name: Medium crude (synthetic)
+    density_15c: 862.0
+    thermal_expansion_coeff: 0.00082
+    viscosity_15c_cst: 38.0
+    viscosity_temp_coeff: 0.038
+    specific_heat_j_kgk: 1930.0
+
+environment:
+  ambient_mean_c: 30.0
+  ambient_diurnal_amplitude_c: 6.0
+  ambient_peak_hour: 14.0
+  gravity: 9.80665
+
+# -----------------------------------------------------------------------------
+# Tanks: vertical cylindrical, flat bottom (Phase 1 geometry).
+# Nominal capacity = pi r^2 * shell height.
+# -----------------------------------------------------------------------------
+tanks:
+  TK-001:
+    name: Tank A — Crude Source
+    diameter_m: 28.0
+    shell_height_m: 16.25          # nominal 10,005 m3
+    max_safe_fill_m: 15.6
+    min_operating_level_m: 1.0     # pumpable heel / dead stock level
+    nozzle_elevation_m: 0.5
+    base_elevation_m: 0.0
+    heat_transfer_ua_w_k: 4200.0
+    initial_product: CRUDE-A
+    initial_level_range_m: [11.0, 14.5]
+    initial_temperature_range_c: [32.0, 40.0]
+    position: [-62.0, 0.0, 0.0]
+  TK-002:
+    name: Tank B — Receiving / Storage
+    diameter_m: 25.0
+    shell_height_m: 16.30          # nominal 8,001 m3
+    max_safe_fill_m: 15.6
+    min_operating_level_m: 1.0
+    nozzle_elevation_m: 0.5
+    base_elevation_m: 0.0
+    heat_transfer_ua_w_k: 3600.0
+    initial_product: CRUDE-B
+    initial_level_range_m: [3.5, 7.0]
+    initial_temperature_range_c: [28.0, 36.0]
+    position: [62.0, 0.0, -36.0]
+  TK-003:
+    name: Tank C — Receiving / Storage
+    diameter_m: 25.0
+    shell_height_m: 16.30
+    max_safe_fill_m: 15.6
+    min_operating_level_m: 1.0
+    nozzle_elevation_m: 0.5
+    base_elevation_m: 0.0
+    heat_transfer_ua_w_k: 3600.0
+    initial_product: CRUDE-A
+    initial_level_range_m: [2.5, 5.5]
+    initial_temperature_range_c: [28.0, 36.0]
+    position: [62.0, 0.0, 36.0]
+
+# -----------------------------------------------------------------------------
+# Hydraulic junctions (pump station manifolds)
+# -----------------------------------------------------------------------------
+junctions:
+  MF-SUC:
+    name: Pump suction manifold
+    elevation_m: 0.5
+    position: [-14.0, 0.5, 0.0]
+  MF-DIS:
+    name: Pump discharge manifold
+    elevation_m: 0.5
+    position: [10.0, 0.5, 0.0]
+
+# -----------------------------------------------------------------------------
+# Pipelines. Flow direction is from `from` to `to` (positive direction).
+# `length_m` is the hydraulic length; `path` is the schematic 3D route.
+# -----------------------------------------------------------------------------
+pipelines:
+  PL-001:
+    name: Main transfer header (TK-001 to pump suction)
+    from: TK-001
+    to: MF-SUC
+    nominal_diameter_mm: 200
+    internal_diameter_m: 0.2027
+    length_m: 180.0
+    roughness_m: 4.5e-5
+    fittings_k: 6.0
+    elevation_m: 0.5
+    path: [[-48.0, 0.5, 0.0], [-14.0, 0.5, 0.0]]
+  PL-002:
+    name: Discharge line to TK-002
+    from: MF-DIS
+    to: TK-002
+    nominal_diameter_mm: 200
+    internal_diameter_m: 0.2027
+    length_m: 420.0
+    roughness_m: 4.5e-5
+    fittings_k: 9.0
+    elevation_m: 0.5
+    path: [[10.0, 0.5, 0.0], [28.0, 0.5, -2.0], [28.0, 0.5, -36.0], [49.5, 0.5, -36.0]]
+  PL-003:
+    name: Discharge line to TK-003
+    from: MF-DIS
+    to: TK-003
+    nominal_diameter_mm: 150
+    internal_diameter_m: 0.1541
+    length_m: 380.0
+    roughness_m: 4.5e-5
+    fittings_k: 9.0
+    elevation_m: 0.5
+    path: [[10.0, 0.5, 0.0], [24.0, 0.5, 2.0], [24.0, 0.5, 36.0], [49.5, 0.5, 36.0]]
+  PL-004:
+    name: TK-002 outlet / inter-tank line to pump suction
+    from: TK-002
+    to: MF-SUC
+    nominal_diameter_mm: 150
+    internal_diameter_m: 0.1541
+    length_m: 300.0
+    roughness_m: 4.5e-5
+    fittings_k: 6.0
+    elevation_m: 0.5
+    path: [[62.0, 0.5, -48.5], [62.0, 0.5, -54.0], [-14.0, 0.5, -54.0], [-14.0, 0.5, 0.0]]
+
+# -----------------------------------------------------------------------------
+# Pumps: identical centrifugal transfer pumps in parallel, MF-SUC -> MF-DIS.
+# Head curve H = H0 - a Q^2 (Q in m3/h). Efficiency parabola peaking at BEP.
+# -----------------------------------------------------------------------------
+pumps:
+  PU-001:
+    name: Transfer pump 1
+    from: MF-SUC
+    to: MF-DIS
+    shutoff_head_m: 85.0
+    curve_coeff_a: 6.6667e-4       # m / (m3/h)^2  -> 70 m at 150 m3/h
+    rated_flow_m3h: 150.0
+    rated_speed_rpm: 2960.0
+    bep_efficiency: 0.76
+    motor_efficiency: 0.94
+    startup_time_s: 6.0
+    position: [-2.0, 0.0, -5.0]
+  PU-002:
+    name: Transfer pump 2
+    from: MF-SUC
+    to: MF-DIS
+    shutoff_head_m: 85.0
+    curve_coeff_a: 6.6667e-4
+    rated_flow_m3h: 150.0
+    rated_speed_rpm: 2960.0
+    bep_efficiency: 0.76
+    motor_efficiency: 0.94
+    startup_time_s: 6.0
+    position: [-2.0, 0.0, 5.0]
+
+# -----------------------------------------------------------------------------
+# Valves. `location` = pipeline + fractional position along it (0 = from end).
+# Characteristic: equal percentage, K(x) = k_open * R^(2(1-x)), referenced to
+# the pipe velocity. Closed valve is tight unless a passing fault is injected.
+# -----------------------------------------------------------------------------
+valves:
+  XV-001:
+    name: TK-001 outlet isolation valve
+    pipeline: PL-001
+    position_on_line: 0.0
+    role: isolation
+    k_open: 0.8
+    rangeability: 50.0
+    stroke_time_s: 25.0
+    tank_side: TK-001
+  XV-002:
+    name: TK-002 inlet control valve
+    pipeline: PL-002
+    position_on_line: 1.0
+    role: control
+    k_open: 4.0
+    rangeability: 50.0
+    stroke_time_s: 30.0
+    tank_side: TK-002
+  XV-003:
+    name: TK-003 inlet control valve
+    pipeline: PL-003
+    position_on_line: 1.0
+    role: control
+    k_open: 4.0
+    rangeability: 50.0
+    stroke_time_s: 30.0
+    tank_side: TK-003
+  XV-004:
+    name: TK-002 outlet isolation valve
+    pipeline: PL-004
+    position_on_line: 0.0
+    role: isolation
+    k_open: 0.8
+    rangeability: 50.0
+    stroke_time_s: 25.0
+    tank_side: TK-002
+
+# -----------------------------------------------------------------------------
+# Instruments. accuracy_* = systematic (calibration) uncertainty, 1-sigma.
+# noise_* = random repeatability per reading, 1-sigma.
+# publish_interval_s = nominal publication period (sim seconds).
+# -----------------------------------------------------------------------------
+sensors:
+  # ---- Tank level (radar gauges)
+  LT-001: {type: level, asset: TK-001, parameter: level, unit: m, range: [0, 17], noise: 0.0012, ar_sigma: 0.0010, ar_tau_s: 600, accuracy: 0.003, resolution: 0.001, publish_interval_s: 1}
+  LT-002: {type: level, asset: TK-002, parameter: level, unit: m, range: [0, 17], noise: 0.0012, ar_sigma: 0.0010, ar_tau_s: 600, accuracy: 0.003, resolution: 0.001, publish_interval_s: 1}
+  LT-003: {type: level, asset: TK-003, parameter: level, unit: m, range: [0, 17], noise: 0.0012, ar_sigma: 0.0010, ar_tau_s: 600, accuracy: 0.003, resolution: 0.001, publish_interval_s: 1}
+  # ---- Temperatures (tank average RTDs, line RTDs, ambient)
+  TT-001: {type: temperature, asset: TK-001, parameter: temperature, unit: degC, range: [-20, 90], noise: 0.04, accuracy: 0.2, resolution: 0.01, publish_interval_s: 2}
+  TT-002: {type: temperature, asset: TK-002, parameter: temperature, unit: degC, range: [-20, 90], noise: 0.04, accuracy: 0.2, resolution: 0.01, publish_interval_s: 2}
+  TT-003: {type: temperature, asset: TK-003, parameter: temperature, unit: degC, range: [-20, 90], noise: 0.04, accuracy: 0.2, resolution: 0.01, publish_interval_s: 2}
+  TT-004: {type: temperature, asset: PL-001, location: 0.93, parameter: temperature, unit: degC, range: [-20, 90], noise: 0.05, accuracy: 0.2, resolution: 0.01, publish_interval_s: 2}
+  TT-005: {type: temperature, asset: MF-DIS, parameter: temperature, unit: degC, range: [-20, 90], noise: 0.05, accuracy: 0.2, resolution: 0.01, publish_interval_s: 2}
+  TT-006: {type: temperature, asset: TF-01, parameter: ambient_temperature, unit: degC, range: [-30, 60], noise: 0.08, accuracy: 0.3, resolution: 0.01, publish_interval_s: 2}
+  # ---- Pressures (bar gauge)
+  PT-001: {type: pressure, asset: PL-001, location: 0.97, parameter: pressure, unit: bar, range: [-1, 16], noise: 0.006, accuracy: 0.02, resolution: 0.001, publish_interval_s: 1}
+  PT-002: {type: pressure, asset: PL-002, location: 0.05, parameter: pressure, unit: bar, range: [-1, 16], noise: 0.006, accuracy: 0.02, resolution: 0.001, publish_interval_s: 1}
+  PT-003: {type: pressure, asset: PL-003, location: 0.05, parameter: pressure, unit: bar, range: [-1, 16], noise: 0.006, accuracy: 0.02, resolution: 0.001, publish_interval_s: 1}
+  PT-004: {type: pressure, asset: PL-004, location: 0.95, parameter: pressure, unit: bar, range: [-1, 16], noise: 0.006, accuracy: 0.02, resolution: 0.001, publish_interval_s: 1}
+  # ---- Flow meters (gross volumetric at line conditions + totalizer)
+  FM-001: {type: flow, asset: PL-001, location: 0.92, parameter: volume_flow, unit: m3/h, range: [0, 400], noise_rel: 0.0015, noise_abs: 0.05, accuracy_rel: 0.0025, low_flow_cutoff: 2.0, resolution: 0.01, publish_interval_s: 1, temperature_sensor: TT-004, density_sensor: DT-001}
+  FM-002: {type: flow, asset: PL-002, location: 0.95, parameter: volume_flow, unit: m3/h, range: [0, 400], noise_rel: 0.0015, noise_abs: 0.05, accuracy_rel: 0.0025, low_flow_cutoff: 2.0, resolution: 0.01, publish_interval_s: 1, temperature_sensor: TT-005, density_sensor: DT-002}
+  FM-003: {type: flow, asset: PL-003, location: 0.95, parameter: volume_flow, unit: m3/h, range: [0, 300], noise_rel: 0.0015, noise_abs: 0.05, accuracy_rel: 0.0025, low_flow_cutoff: 2.0, resolution: 0.01, publish_interval_s: 1, temperature_sensor: TT-005, density_sensor: DT-002}
+  # ---- Density (base density @ 15 degC output)
+  DT-001: {type: density, asset: PL-001, location: 0.90, parameter: density_15c, unit: kg/m3, range: [700, 1000], noise: 0.15, accuracy: 0.5, resolution: 0.01, publish_interval_s: 5}
+  DT-002: {type: density, asset: MF-DIS, parameter: density_15c, unit: kg/m3, range: [700, 1000], noise: 0.15, accuracy: 0.5, resolution: 0.01, publish_interval_s: 5}
+  # ---- Pump skid instruments
+  PU-001-ST: {type: pump_status, asset: PU-001, parameter: status, unit: state, publish_interval_s: 10, on_change: true}
+  PU-001-SP: {type: pump_speed, asset: PU-001, parameter: speed, unit: rpm, range: [0, 3600], noise: 2.0, accuracy: 5.0, resolution: 1.0, publish_interval_s: 2}
+  PU-001-PW: {type: pump_power, asset: PU-001, parameter: power, unit: kW, range: [0, 200], noise_rel: 0.004, noise_abs: 0.05, accuracy_rel: 0.01, resolution: 0.01, publish_interval_s: 2}
+  PU-001-PD: {type: pressure, asset: PU-001, parameter: discharge_pressure, unit: bar, range: [-1, 16], noise: 0.006, accuracy: 0.02, resolution: 0.001, publish_interval_s: 1}
+  PU-002-ST: {type: pump_status, asset: PU-002, parameter: status, unit: state, publish_interval_s: 10, on_change: true}
+  PU-002-SP: {type: pump_speed, asset: PU-002, parameter: speed, unit: rpm, range: [0, 3600], noise: 2.0, accuracy: 5.0, resolution: 1.0, publish_interval_s: 2}
+  PU-002-PW: {type: pump_power, asset: PU-002, parameter: power, unit: kW, range: [0, 200], noise_rel: 0.004, noise_abs: 0.05, accuracy_rel: 0.01, resolution: 0.01, publish_interval_s: 2}
+  PU-002-PD: {type: pressure, asset: PU-002, parameter: discharge_pressure, unit: bar, range: [-1, 16], noise: 0.006, accuracy: 0.02, resolution: 0.001, publish_interval_s: 1}
+  # ---- Valve position feedback & command
+  XV-001-ZT: {type: valve_position, asset: XV-001, parameter: position, unit: "%", range: [0, 100], noise: 0.0, resolution: 0.1, publish_interval_s: 5, on_change: true}
+  XV-001-ZC: {type: valve_command, asset: XV-001, parameter: command, unit: state, publish_interval_s: 10, on_change: true}
+  XV-002-ZT: {type: valve_position, asset: XV-002, parameter: position, unit: "%", range: [0, 100], noise: 0.0, resolution: 0.1, publish_interval_s: 5, on_change: true}
+  XV-002-ZC: {type: valve_command, asset: XV-002, parameter: command, unit: state, publish_interval_s: 10, on_change: true}
+  XV-003-ZT: {type: valve_position, asset: XV-003, parameter: position, unit: "%", range: [0, 100], noise: 0.0, resolution: 0.1, publish_interval_s: 5, on_change: true}
+  XV-003-ZC: {type: valve_command, asset: XV-003, parameter: command, unit: state, publish_interval_s: 10, on_change: true}
+  XV-004-ZT: {type: valve_position, asset: XV-004, parameter: position, unit: "%", range: [0, 100], noise: 0.0, resolution: 0.1, publish_interval_s: 5, on_change: true}
+  XV-004-ZC: {type: valve_command, asset: XV-004, parameter: command, unit: state, publish_interval_s: 10, on_change: true}
+
+# -----------------------------------------------------------------------------
+# Valid transfer routes and their explicit measurement configuration.
+# custody_meter: meter whose totalizer quantity is booked on the transfer ticket.
+# control_meter: meter used by the control valve's flow controller.
+# -----------------------------------------------------------------------------
+routes:
+  R-01:
+    name: TK-001 to TK-002
+    source: TK-001
+    destination: TK-002
+    open_valves: [XV-001, XV-002]
+    control_valve: XV-002
+    control_meter: FM-002
+    custody_meter: FM-002
+    pipelines: [PL-001, PL-002]
+    meters: [FM-001, FM-002]
+    setpoint_range_m3h: [90.0, 150.0]
+  R-02:
+    name: TK-001 to TK-003
+    source: TK-001
+    destination: TK-003
+    open_valves: [XV-001, XV-003]
+    control_valve: XV-003
+    control_meter: FM-003
+    custody_meter: FM-003
+    pipelines: [PL-001, PL-003]
+    meters: [FM-001, FM-003]
+    setpoint_range_m3h: [80.0, 130.0]
+  R-03:
+    name: TK-002 to TK-003
+    source: TK-002
+    destination: TK-003
+    open_valves: [XV-004, XV-003]
+    control_valve: XV-003
+    control_meter: FM-003
+    custody_meter: FM-003
+    pipelines: [PL-004, PL-003]
+    meters: [FM-003]
+    setpoint_range_m3h: [60.0, 95.0]
+
+# -----------------------------------------------------------------------------
+# Flow controller tuning (PI on control meter, acting on control valve)
+# -----------------------------------------------------------------------------
+control:
+  flow_kp: 0.0006      # valve fraction per (m3/h) error (loop gain ~0.25)
+  flow_ti_s: 12.0

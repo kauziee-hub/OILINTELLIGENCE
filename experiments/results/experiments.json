@@ -1,0 +1,752 @@
+{
+  "simulator": {
+    "max_abs_conservation_error_kg": 1.862645149230957e-08,
+    "total_mass_t": 10326.697875038877,
+    "telemetry_completeness": 1.0,
+    "sensors_reporting": 34,
+    "sensors_configured": 34
+  },
+  "coverage": {
+    "n_runs": 12,
+    "hours_per_run": 8.0,
+    "seeds": [
+      7001,
+      7012
+    ],
+    "sampling_10s": {
+      "by_kind": {
+        "CV": {
+          "n": 644,
+          "mean": -0.021,
+          "sd": 0.881,
+          "within_1sigma": 0.739,
+          "within_2sigma": 0.974,
+          "within_3sigma": 1.0,
+          "max_abs": 2.91
+        },
+        "DCONS": {
+          "n": 151,
+          "mean": -0.18,
+          "sd": 1.084,
+          "within_1sigma": 0.735,
+          "within_2sigma": 0.947,
+          "within_3sigma": 0.967,
+          "max_abs": 3.67
+        },
+        "LEDGER": {
+          "n": 242,
+          "mean": 0.001,
+          "sd": 0.005,
+          "within_1sigma": 1.0,
+          "within_2sigma": 1.0,
+          "within_3sigma": 1.0,
+          "max_abs": 0.04
+        },
+        "PUMP": {
+          "n": 82,
+          "mean": -0.216,
+          "sd": 1.218,
+          "within_1sigma": 0.5,
+          "within_2sigma": 0.915,
+          "within_3sigma": 1.0,
+          "max_abs": 2.51
+        },
+        "TCONS": {
+          "n": 148,
+          "mean": 0.227,
+          "sd": 0.844,
+          "within_1sigma": 0.689,
+          "within_2sigma": 1.0,
+          "within_3sigma": 1.0,
+          "max_abs": 1.62
+        },
+        "TICKET": {
+          "n": 30,
+          "mean": 0.317,
+          "sd": 0.799,
+          "within_1sigma": 0.767,
+          "within_2sigma": 0.967,
+          "within_3sigma": 1.0,
+          "max_abs": 2.06
+        }
+      },
+      "all": {
+        "n": 1297,
+        "mean": -0.012,
+        "sd": 0.851,
+        "within_1sigma": 0.767,
+        "within_2sigma": 0.975,
+        "within_3sigma": 0.996,
+        "max_abs": 3.67
+      },
+      "chi2_per_dof": 0.723,
+      "ks_p_value_vs_normal": 8.4438130809953895e-19
+    },
+    "sampling_120s": {
+      "by_kind": {
+        "CV": {
+          "n": 645,
+          "mean": -0.009,
+          "sd": 0.931,
+          "within_1sigma": 0.71,
+          "within_2sigma": 0.974,
+          "within_3sigma": 0.998,
+          "max_abs": 3.34
+        },
+        "DCONS": {
+          "n": 155,
+          "mean": -0.148,
+          "sd": 1.122,
+          "within_1sigma": 0.723,
+          "within_2sigma": 0.942,
+          "within_3sigma": 0.961,
+          "max_abs": 3.74
+        },
+        "LEDGER": {
+          "n": 244,
+          "mean": 0.384,
+          "sd": 0.698,
+          "within_1sigma": 0.828,
+          "within_2sigma": 0.914,
+          "within_3sigma": 1.0,
+          "max_abs": 2.53
+        },
+        "PUMP": {
+          "n": 84,
+          "mean": -0.254,
+          "sd": 1.219,
+          "within_1sigma": 0.476,
+          "within_2sigma": 0.893,
+          "within_3sigma": 1.0,
+          "max_abs": 2.45
+        },
+        "TCONS": {
+          "n": 150,
+          "mean": 0.231,
+          "sd": 0.832,
+          "within_1sigma": 0.72,
+          "within_2sigma": 1.0,
+          "within_3sigma": 1.0,
+          "max_abs": 1.69
+        },
+        "TICKET": {
+          "n": 30,
+          "mean": 0.978,
+          "sd": 0.895,
+          "within_1sigma": 0.6,
+          "within_2sigma": 0.833,
+          "within_3sigma": 0.967,
+          "max_abs": 3.02
+        }
+      },
+      "all": {
+        "n": 1308,
+        "mean": 0.082,
+        "sd": 0.955,
+        "within_1sigma": 0.717,
+        "within_2sigma": 0.953,
+        "within_3sigma": 0.994,
+        "max_abs": 3.74
+      },
+      "chi2_per_dof": 0.918,
+      "ks_p_value_vs_normal": 8.1583909233235e-11
+    }
+  },
+  "ablation": {
+    "n_cases": {
+      "A": 45,
+      "C": 12
+    },
+    "variants": {
+      "full_model": {
+        "A_top1_family": 0.644,
+        "A_top3_hypothesis": 0.8,
+        "A_mean_log_loss": 1.96,
+        "C_confident_known_cause": 0,
+        "C_abstained_unknown": 3
+      },
+      "no_two_fault_hypotheses": {
+        "A_top1_family": 0.622,
+        "A_top3_hypothesis": 0.8,
+        "A_mean_log_loss": 1.825,
+        "C_confident_known_cause": 4,
+        "C_abstained_unknown": 3
+      },
+      "no_accounting_records": {
+        "A_top1_family": 0.578,
+        "A_top3_hypothesis": 0.733,
+        "A_mean_log_loss": 2.115,
+        "C_confident_known_cause": 0,
+        "C_abstained_unknown": 0
+      },
+      "no_temperature_density_consistency": {
+        "A_top1_family": 0.622,
+        "A_top3_hypothesis": 0.778,
+        "A_mean_log_loss": 1.985,
+        "C_confident_known_cause": 0,
+        "C_abstained_unknown": 3
+      },
+      "no_pump_curve": {
+        "A_top1_family": 0.6,
+        "A_top3_hypothesis": 0.778,
+        "A_mean_log_loss": 2.073,
+        "C_confident_known_cause": 0,
+        "C_abstained_unknown": 3
+      },
+      "control_volume_rows_only": {
+        "A_top1_family": 0.511,
+        "A_top3_hypothesis": 0.689,
+        "A_mean_log_loss": 2.248,
+        "C_confident_known_cause": 0,
+        "C_abstained_unknown": 0
+      },
+      "no_unknown_catch_all": {
+        "A_top1_family": 0.644,
+        "A_top3_hypothesis": 0.8,
+        "A_mean_log_loss": 1.96,
+        "C_confident_known_cause": 0,
+        "C_abstained_unknown": 0
+      }
+    }
+  },
+  "agent_evaluation": {
+    "summary": {
+      "n_cases": 16,
+      "known_fault_cases": 12,
+      "initial_top1_rate": 0.833,
+      "initial_top3_rate": 1.0,
+      "resolved_rate": 0.75,
+      "resolved_correct_rate": 0.75,
+      "wrong_resolutions": 0,
+      "confident_wrong_cases": 0,
+      "mean_checks_known": 2.25,
+      "grounding_pass_rate": 1.0,
+      "evidence_completeness_mean": 1.0,
+      "investigation_wall_s_median": 1.79,
+      "tool_error_rate": 0.0,
+      "final_status_counts": {
+        "RESOLVED_PENDING_APPROVAL": 11,
+        "AWAITING_VERIFICATION": 3,
+        "AWAITING_REVIEW": 2
+      },
+      "normal_cases_final_status": [
+        "AWAITING_REVIEW",
+        "AWAITING_VERIFICATION"
+      ],
+      "unseen_cases": [
+        {
+          "scenario": "A-DENSITY_BIAS-11",
+          "truth": [
+            "DENSITY_ERROR:DT-001"
+          ],
+          "final_status": "RESOLVED_PENDING_APPROVAL",
+          "final_top": "DENSITY_ERROR:DT-001",
+          "final_top_p": 0.951,
+          "correct": true
+        },
+        {
+          "scenario": "A-DENSITY_BIAS-12",
+          "truth": [
+            "DENSITY_ERROR:DT-002"
+          ],
+          "final_status": "RESOLVED_PENDING_APPROVAL",
+          "final_top": "DENSITY_ERROR:DT-002",
+          "final_top_p": 0.969,
+          "correct": true
+        }
+      ]
+    },
+    "behaviour": {
+      "duplicate_event_attached_to_open_case": true,
+      "missing_level_gauge_requests_data": true,
+      "report_requires_engineer_approval": true
+    },
+    "cases": [
+      {
+        "scenario": "A-PIPELINE_LEAK-11",
+        "family": "PIPELINE_LEAK",
+        "env": "A",
+        "truth": [
+          "PIPELINE_LEAK:PL-001"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "TANK_LEAK:TK-001",
+          "PIPELINE_LEAK:PL-001",
+          "PUMP_DEGRADATION:PU-001"
+        ],
+        "initial_top1": false,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.83,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "PIPELINE_LEAK:PL-001",
+        "final_top_p": 0.948,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-PIPELINE_LEAK-12",
+        "family": "PIPELINE_LEAK",
+        "env": "A",
+        "truth": [
+          "PIPELINE_LEAK:PL-001"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "PIPELINE_LEAK:PL-001",
+          "METER_ERROR:FM-002",
+          "VALVE_PASSING:XV-003"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.76,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "PIPELINE_LEAK:PL-001",
+        "final_top_p": 0.989,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-TANK_LEAK-11",
+        "family": "TANK_LEAK",
+        "env": "A",
+        "truth": [
+          "TANK_LEAK:TK-001"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "TANK_LEAK:TK-001",
+          "LEVEL_ERROR:LT-001",
+          "VALVE_PASSING:XV-001"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.76,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 3,
+        "final_top": "TANK_LEAK:TK-001",
+        "final_top_p": 0.927,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-TANK_LEAK-12",
+        "family": "TANK_LEAK",
+        "env": "A",
+        "truth": [
+          "TANK_LEAK:TK-002"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "TANK_LEAK:TK-002",
+          "LEVEL_ERROR:LT-002",
+          "TEMP_ERROR:TT-002"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.64,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "AWAITING_VERIFICATION",
+        "checks": 5,
+        "final_top": "TANK_LEAK:TK-002",
+        "final_top_p": 0.665,
+        "resolved": false,
+        "resolved_correct": false,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-METER_BIAS-11",
+        "family": "METER_BIAS",
+        "env": "A",
+        "truth": [
+          "METER_ERROR:FM-001"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "METER_ERROR:FM-001",
+          "PUMP_DEGRADATION:PU-002",
+          "NORMAL"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.85,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 2,
+        "final_top": "METER_ERROR:FM-001",
+        "final_top_p": 0.986,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-METER_BIAS-12",
+        "family": "METER_BIAS",
+        "env": "A",
+        "truth": [
+          "METER_ERROR:FM-002"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "METER_ERROR:FM-002",
+          "VALVE_PASSING:XV-004",
+          "PIPELINE_LEAK:PL-004"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.81,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "METER_ERROR:FM-002",
+        "final_top_p": 0.962,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-LEVEL_DRIFT-11",
+        "family": "LEVEL_DRIFT",
+        "env": "A",
+        "truth": [
+          "LEVEL_ERROR:LT-001"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "TANK_LEAK:TK-001",
+          "LEVEL_ERROR:LT-001",
+          "VALVE_PASSING:XV-001"
+        ],
+        "initial_top1": false,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.76,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "AWAITING_REVIEW",
+        "checks": 5,
+        "final_top": "LEVEL_ERROR:LT-001",
+        "final_top_p": 0.553,
+        "resolved": false,
+        "resolved_correct": false,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-LEVEL_DRIFT-12",
+        "family": "LEVEL_DRIFT",
+        "env": "A",
+        "truth": [
+          "LEVEL_ERROR:LT-003"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "LEVEL_ERROR:LT-003",
+          "TANK_LEAK:TK-003",
+          "VALVE_PASSING:XV-003"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.85,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "LEVEL_ERROR:LT-003",
+        "final_top_p": 0.938,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-VALVE_PASSING-11",
+        "family": "VALVE_PASSING",
+        "env": "A",
+        "truth": [
+          "VALVE_PASSING:XV-004"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "VALVE_PASSING:XV-004",
+          "VALVE_PASSING:XV-002",
+          "METER_ERROR:FM-003"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.89,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "VALVE_PASSING:XV-004",
+        "final_top_p": 0.96,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-VALVE_PASSING-12",
+        "family": "VALVE_PASSING",
+        "env": "A",
+        "truth": [
+          "VALVE_PASSING:XV-003"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "VALVE_PASSING:XV-003",
+          "METER_ERROR:FM-003",
+          "TEMP_ERROR:TT-003"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.98,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "AWAITING_VERIFICATION",
+        "checks": 5,
+        "final_top": "VALVE_PASSING:XV-003",
+        "final_top_p": 0.326,
+        "resolved": false,
+        "resolved_correct": false,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-MISSING_TRANSACTION-11",
+        "family": "MISSING_TRANSACTION",
+        "env": "A",
+        "truth": [
+          "MISSING_TRANSFER:R-02"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "MISSING_TRANSFER:R-02",
+          "NORMAL",
+          "PIPELINE_LEAK:PL-001"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.77,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "MISSING_TRANSFER:R-02",
+        "final_top_p": 0.992,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-MISSING_TRANSACTION-12",
+        "family": "MISSING_TRANSACTION",
+        "env": "A",
+        "truth": [
+          "MISSING_TRANSFER:R-01"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "MISSING_TRANSFER:R-01",
+          "PIPELINE_LEAK:PL-001",
+          "NORMAL"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.7,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "MISSING_TRANSFER:R-01",
+        "final_top_p": 0.991,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-NORMAL-11",
+        "family": "NORMAL",
+        "env": "A",
+        "truth": [],
+        "initial_status": "AWAITING_REVIEW",
+        "initial_top": [
+          "NORMAL",
+          "METER_ERROR:FM-002",
+          "METER_ERROR:FM-003"
+        ],
+        "initial_top1": true,
+        "initial_top3": null,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 2.01,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "AWAITING_REVIEW",
+        "checks": 0,
+        "final_top": "NORMAL",
+        "final_top_p": 0.525,
+        "resolved": false,
+        "resolved_correct": false,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-NORMAL-12",
+        "family": "NORMAL",
+        "env": "A",
+        "truth": [],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "NORMAL",
+          "TANK_LEAK:TK-003",
+          "PIPELINE_LEAK:PL-001"
+        ],
+        "initial_top1": true,
+        "initial_top3": null,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.68,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "AWAITING_VERIFICATION",
+        "checks": 5,
+        "final_top": "NORMAL",
+        "final_top_p": 0.642,
+        "resolved": false,
+        "resolved_correct": false,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-DENSITY_BIAS-11",
+        "family": "DENSITY_BIAS",
+        "env": "A",
+        "truth": [
+          "DENSITY_ERROR:DT-001"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "DENSITY_ERROR:DT-001",
+          "PUMP_DEGRADATION:PU-002",
+          "PUMP_DEGRADATION:PU-001"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.76,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "DENSITY_ERROR:DT-001",
+        "final_top_p": 0.951,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      },
+      {
+        "scenario": "A-DENSITY_BIAS-12",
+        "family": "DENSITY_BIAS",
+        "env": "A",
+        "truth": [
+          "DENSITY_ERROR:DT-002"
+        ],
+        "initial_status": "AWAITING_VERIFICATION",
+        "initial_top": [
+          "DENSITY_ERROR:DT-002",
+          "VALVE_PASSING:XV-003",
+          "PIPELINE_LEAK:PL-004"
+        ],
+        "initial_top1": true,
+        "initial_top3": true,
+        "grounded": true,
+        "evidence_completeness": 1.0,
+        "missing_evidence_items": [],
+        "investigation_wall_s": 1.91,
+        "tool_calls": 0,
+        "tool_errors": 0,
+        "final_status": "RESOLVED_PENDING_APPROVAL",
+        "checks": 1,
+        "final_top": "DENSITY_ERROR:DT-002",
+        "final_top_p": 0.969,
+        "resolved": true,
+        "resolved_correct": true,
+        "wrong_resolution": false,
+        "confident_wrong": false
+      }
+    ]
+  },
+  "api": {
+    "standard_p50_ms": 17.3,
+    "standard_p95_ms": 28.4,
+    "history_p95_ms": 59.6,
+    "requests": 917,
+    "note": "in-process TestClient, SQLite, live simulation at 60x; excludes network"
+  },
+  "generated_at": "2026-11-03T15:57:53.384783+00:00",
+  "seconds": 1322.4
+}

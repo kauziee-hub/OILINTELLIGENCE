@@ -1,0 +1,129 @@
+kinds=CV k=0.75 h=4.0
+   normal/4242: none
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +60m CV:TK-001
+   level_dr/4242: +120m CV:TK-002
+   missing_/4242: none
+   unknown_/4242: none
+   pump_deg/4242: none
+   normal/11: none
+   normal/22: none
+   normal/33: none
+   normal/44: none
+   normal/55: none
+   normal/66: none
+kinds=CV k=1.0 h=4.0
+   normal/4242: none
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +60m CV:TK-001
+   level_dr/4242: +150m CV:TK-002
+   missing_/4242: none
+   unknown_/4242: none
+   pump_deg/4242: none
+   normal/11: none
+   normal/22: none
+   normal/33: none
+   normal/44: none
+   normal/55: none
+   normal/66: none
+kinds=CV k=1.0 h=5.0
+   normal/4242: none
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +90m CV:TK-001
+   level_dr/4242: +150m CV:TK-002
+   missing_/4242: none
+   unknown_/4242: none
+   pump_deg/4242: none
+   normal/11: none
+   normal/22: none
+   normal/33: none
+   normal/44: none
+   normal/55: none
+   normal/66: none
+kinds=CV k=1.25 h=5.0
+   normal/4242: none
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +90m CV:TK-001
+   level_dr/4242: +180m CV:TK-002
+   missing_/4242: none
+   unknown_/4242: none
+   pump_deg/4242: none
+   normal/11: none
+   normal/22: none
+   normal/33: none
+   normal/44: none
+   normal/55: none
+   normal/66: none
+kinds=CV+TCONS+DCONS+PUMP+TICKET+LEDGER k=0.75 h=4.0
+   normal/4242: FA TCONS:TT-005
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +60m CV:TK-001
+   level_dr/4242: +120m CV:TK-002
+   missing_/4242: +15m LEDGER:FM-001
+   unknown_/4242: +135m TICKET:D-2
+   pump_deg/4242: +30m PUMP:PU-001
+   normal/11: FA TCONS:TT-005
+   normal/22: FA TCONS:TT-005
+   normal/33: FA DCONS:DT-001
+   normal/44: FA TCONS:TT-005
+   normal/55: FA DCONS:DT-001
+   normal/66: none
+kinds=CV+TCONS+DCONS+PUMP+TICKET+LEDGER k=1.0 h=4.0
+   normal/4242: none
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +60m CV:TK-001
+   level_dr/4242: +150m CV:TK-002
+   missing_/4242: +15m LEDGER:FM-001
+   unknown_/4242: +135m TICKET:D-2
+   pump_deg/4242: +30m PUMP:PU-001
+   normal/11: none
+   normal/22: FA TCONS:TT-005
+   normal/33: FA DCONS:DT-001
+   normal/44: none
+   normal/55: none
+   normal/66: none
+kinds=CV+TCONS+DCONS+PUMP+TICKET+LEDGER k=1.0 h=5.0
+   normal/4242: none
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +90m CV:TK-001
+   level_dr/4242: +150m CV:TK-002
+   missing_/4242: +15m LEDGER:FM-001
+   unknown_/4242: +135m TICKET:D-2
+   pump_deg/4242: +30m PUMP:PU-001
+   normal/11: none
+   normal/22: FA TCONS:TT-005
+   normal/33: none
+   normal/44: none
+   normal/55: none
+   normal/66: none
+kinds=CV+TCONS+DCONS+PUMP+TICKET+LEDGER k=1.25 h=5.0
+   normal/4242: none
+   pipeline/4242: +30m CV:MANIFOLD
+   meter_bi/4242: +30m CV:MANIFOLD
+   passing_/4242: +30m CV:PL-003[0.95-1.00]
+   tank_lea/4242: +90m CV:TK-001
+   level_dr/4242: +180m CV:TK-002
+   missing_/4242: +15m LEDGER:FM-001
+   unknown_/4242: +135m TICKET:D-2
+   pump_deg/4242: +30m PUMP:PU-001
+   normal/11: none
+   normal/22: FA TCONS:TT-005
+   normal/33: none
+   normal/44: none
+   normal/55: none
+   normal/66: none
+exit=0

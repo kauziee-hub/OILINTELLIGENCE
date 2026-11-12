@@ -1,0 +1,9 @@
+{
+ "temperature": 0.5,
+ "prior_mix": 0.1,
+ "loss_model_rel_error": 0.15,
+ "type": "analytical-calibration",
+ "name": "physics_bayes",
+ "version": "v1-bea418efe9d3-202611071423",
+ "created": "2026-11-07T14:23:44.855219+00:00"
+}
